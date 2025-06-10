@@ -1,0 +1,29 @@
+# Dataset configuration
+nuscenes_version: 'v1.0-mini'
+nuscenes_root: 'datasets/NuScenes'
+image_size: 224
+max_text_length: 128
+past_timesteps: 8
+future_timesteps: 12
+
+# Model configuration
+vision_model_name: 'vit_base_patch16_224'
+language_model_name: 'bert-base-uncased'
+trajectory_input_dim: 16  # past_timesteps * 2 (x,y coordinates)
+hidden_dim: 512  # Hidden dimension for reasoning module
+
+# Reasoning configuration
+num_cot_steps: 5  # Number of steps in Chain of Thought
+num_trajectory_samples: 5  # Number of samples for Self-Consistency
+reasoning_type: 'cot_sc'  # Options: 'cot', 'cot_sc', 'tot'
+
+# Training configuration
+batch_size: 8  # Reduced for GTX 1650
+num_workers: 2
+learning_rate: 0.0001  # 1e-4 as float
+num_epochs: 100
+checkpoint_dir: 'checkpoints'
+
+# Logging configuration
+wandb_project: 'multimodal-trajectory'
+wandb_entity: null  # Set your wandb username here 
